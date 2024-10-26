@@ -30,6 +30,10 @@ export class Event {
 export class EventDispatcher {
     private _listeners: IListeners;
 
+    static initialize() {
+        return new EventDispatcher();
+    }
+
     constructor() {
         this._listeners = {};
     }

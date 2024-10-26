@@ -15,6 +15,9 @@ export class Event {
     }
 }
 export class EventDispatcher {
+    static initialize() {
+        return new EventDispatcher();
+    }
     constructor() {
         this._listeners = {};
     }

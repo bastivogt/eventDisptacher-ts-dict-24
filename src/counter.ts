@@ -50,3 +50,50 @@ export class Counter extends EventDispatcher {
         );
     }
 }
+
+export class Counter2 {
+    private _ed: EventDispatcher;
+
+    private _start: number;
+    private _stop: number;
+    private _step: number;
+    private _count: number;
+
+    constructor(start: number = 0, stop: number = 10, step: number = 1) {
+        this._ed = EventDispatcher.initialize();
+        this._start = start;
+        this._stop = stop;
+        this._step = step;
+        this._count = this._start;
+    }
+
+    get eventDispatcher() {
+        return this._ed;
+    }
+
+    get count() {
+        return this._count;
+    }
+
+    run() {
+        this._count = this._start;
+
+        this._ed.dispatch(
+            new CounterEvent(CounterEvent.COUNTER_STARTED, this, {
+                count: this._count,
+            })
+        );
+        for (; this._count < this._stop; this._count += this._step) {
+            this._ed.dispatch(
+                new CounterEvent(CounterEvent.COUNTER_CHANGED, this, {
+                    count: this._count,
+                })
+            );
+        }
+        this._ed.dispatch(
+            new CounterEvent(CounterEvent.COUNTER_FINISHED, this, {
+                count: this._count,
+            })
+        );
+    }
+}
