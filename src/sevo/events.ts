@@ -1,8 +1,8 @@
-interface IListeners {
-    [key: string]: ListenerFunction;
+interface IListeners<E extends Event> {
+    [key: string]: ListenerFunction<E>;
 }
 
-type ListenerFunction = (event: Event) => void;
+type ListenerFunction<E extends Event> = (event: E) => void;
 
 export class Event {
     private _type: string;
@@ -27,11 +27,11 @@ export class Event {
     }
 }
 
-export class EventDispatcher {
-    private _listeners: IListeners;
+export class EventDispatcher<E extends Event> {
+    private _listeners: IListeners<E>;
 
-    static initialize() {
-        return new EventDispatcher();
+    static initialize<T extends Event>() {
+        return new EventDispatcher<T>();
     }
 
     constructor() {
@@ -46,7 +46,7 @@ export class EventDispatcher {
         return type in this._listeners;
     }
 
-    on(type: string, listener: ListenerFunction): boolean {
+    on(type: string, listener: ListenerFunction<E>): boolean {
         if (!this.hasListener(type)) {
             this._listeners[type] = listener;
             return true;
@@ -62,7 +62,7 @@ export class EventDispatcher {
         return false;
     }
 
-    dispatch(event: Event): boolean {
+    dispatch(event: E): boolean {
         if (this.hasListener(event.type)) {
             this._listeners[event.type](event);
             return true;

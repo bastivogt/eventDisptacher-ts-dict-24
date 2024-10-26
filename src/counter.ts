@@ -10,7 +10,7 @@ export class CounterEvent extends Event {
     }
 }
 
-export class Counter extends EventDispatcher {
+export class Counter extends EventDispatcher<CounterEvent> {
     private _start: number;
     private _stop: number;
     private _step: number;
@@ -52,7 +52,7 @@ export class Counter extends EventDispatcher {
 }
 
 export class Counter2 {
-    private _ed: EventDispatcher;
+    private _ed: EventDispatcher<CounterEvent>;
 
     private _start: number;
     private _stop: number;
