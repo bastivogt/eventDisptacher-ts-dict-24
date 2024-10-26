@@ -1,5 +1,5 @@
 import { Counter, CounterEvent, Counter2 } from "./counter.js";
-import { Event } from "./sevo/events.js";
+import { Event, ListenerFunction } from "./sevo/events.js";
 
 const c = new Counter();
 
@@ -23,13 +23,27 @@ console.log("-------------------------------------");
 
 const c2 = new Counter2(100, 200, 10);
 
+// handler function
+// function c2_counterChangedHandler(e: CounterEvent) {
+//     const sender = e.sender as Counter;
+//     console.log(e.type, sender.count, e.params.count);
+// }
+const c2_counterChangedHandler: ListenerFunction<CounterEvent> = (
+    e: CounterEvent
+) => {
+    const sender = e.sender as Counter;
+    console.log(e.type, sender.count, e.params.count);
+};
+
 c2.eventDispatcher.on(CounterEvent.COUNTER_STARTED, (e: CounterEvent) => {
     console.log(e.type, e.params.count);
 });
 
-c2.eventDispatcher.on(CounterEvent.COUNTER_CHANGED, (e: CounterEvent) => {
+/* c2.eventDispatcher.on(CounterEvent.COUNTER_CHANGED, (e: CounterEvent) => {
     console.log(e.type, e.params.count);
-});
+}); */
+
+c2.eventDispatcher.on(CounterEvent.COUNTER_CHANGED, c2_counterChangedHandler);
 
 c2.eventDispatcher.on(CounterEvent.COUNTER_FINISHED, (e: CounterEvent) => {
     console.log(e.type, e.params.count);

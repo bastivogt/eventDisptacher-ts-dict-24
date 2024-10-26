@@ -2,7 +2,11 @@ interface IListeners<E extends Event> {
     [key: string]: ListenerFunction<E>;
 }
 
-type ListenerFunction<E extends Event> = (event: E) => void;
+export type ListenerFunction<E extends Event> = (event: E) => void;
+
+// export interface ListenerFunction<E extends Event> {
+//     (event: E): void;
+// }
 
 export class Event {
     private _type: string;

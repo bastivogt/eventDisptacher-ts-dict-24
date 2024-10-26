@@ -1,3 +1,6 @@
+// export interface ListenerFunction<E extends Event> {
+//     (event: E): void;
+// }
 export class Event {
     constructor(type, sender, params = {}) {
         this._type = type;
