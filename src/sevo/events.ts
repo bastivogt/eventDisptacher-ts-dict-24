@@ -50,7 +50,7 @@ export class EventDispatcher {
         return false;
     }
 
-    Off(type: string): boolean {
+    off(type: string): boolean {
         if (this.hasListener(type)) {
             delete this._listeners[type];
             return true;

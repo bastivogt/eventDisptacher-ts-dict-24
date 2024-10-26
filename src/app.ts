@@ -14,7 +14,7 @@ c.on(CounterEvent.COUNTER_FINISHED, (e: CounterEvent) => {
     console.log(e.type, (e.sender as Counter).count, e.params);
 });
 
-//c.Off(CounterEvent.COUNTER_CHANGED);
+//c.off(CounterEvent.COUNTER_CHANGED);
 c.run();
 
 console.log("APP");

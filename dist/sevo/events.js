@@ -31,7 +31,7 @@ export class EventDispatcher {
         }
         return false;
     }
-    Off(type) {
+    off(type) {
         if (this.hasListener(type)) {
             delete this._listeners[type];
             return true;
