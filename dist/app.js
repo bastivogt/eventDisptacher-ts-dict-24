@@ -1,4 +1,5 @@
 import { Counter, CounterEvent, Counter2 } from "./counter.js";
+import { Event } from "./sevo/events.js";
 const c = new Counter();
 c.on(CounterEvent.COUNTER_STARTED, (e) => {
     console.log(e.type, e.sender.count, e.params.count);
@@ -22,6 +23,13 @@ c2.eventDispatcher.on(CounterEvent.COUNTER_CHANGED, (e) => {
 });
 c2.eventDispatcher.on(CounterEvent.COUNTER_FINISHED, (e) => {
     console.log(e.type, e.params.count);
+    const sender = e.sender;
+    setTimeout(() => {
+        sender.eventDispatcher.dispatch(new Event("counterComplete", sender, { count: sender.count }));
+    }, 2000);
+});
+c2.eventDispatcher.on("counterComplete", (e) => {
+    console.log("COMPLETE", e.sender.count, e.params.count);
 });
 c2.eventDispatcher.off(CounterEvent.COUNTER_CHANGED);
 // c2.eventDispatcher.clear();
