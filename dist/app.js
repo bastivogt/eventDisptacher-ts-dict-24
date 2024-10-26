@@ -24,5 +24,6 @@ c2.eventDispatcher.on(CounterEvent.COUNTER_FINISHED, (e) => {
     console.log(e.type, e.params.count);
 });
 c2.eventDispatcher.off(CounterEvent.COUNTER_CHANGED);
+// c2.eventDispatcher.clear();
 c2.run();
 console.log(c2.eventDispatcher.listeners);

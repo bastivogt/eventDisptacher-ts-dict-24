@@ -48,4 +48,7 @@ export class EventDispatcher {
         }
         return false;
     }
+    clear() {
+        this._listeners = {};
+    }
 }
