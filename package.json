@@ -1,0 +1,15 @@
+{
+    "name": "sevo-events-object",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "ts:build": "npx tsc",
+        "ts:watch": "npx tsc -w"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "typescript": "^5.6.3"
+    }
+}
