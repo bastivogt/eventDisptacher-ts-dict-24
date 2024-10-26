@@ -5,9 +5,9 @@ interface IListeners {
 type ListenerFunction = (event: Event) => void;
 
 export class Event {
-    protected _type: string;
-    protected _sender: object;
-    protected _params: any;
+    private _type: string;
+    private _sender: object;
+    private _params: any;
     constructor(type: string, sender: object, params: any = {}) {
         this._type = type;
         this._sender = sender;
